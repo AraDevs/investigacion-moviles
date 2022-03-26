@@ -1,8 +1,7 @@
 package com.aradevs.storagemanager.modules
 
-import com.aradevs.storagemanager.repositories.UsersRepository
-import com.aradevs.storagemanager.use_cases.GetUserUseCase
-import com.aradevs.storagemanager.use_cases.SaveUserUseCase
+import com.aradevs.storagemanager.repositories.DatabaseRepository
+import com.aradevs.storagemanager.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,12 +11,27 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class UseCasesModule {
     @Provides
-    fun providesGetUserUseCase(repository: UsersRepository) : GetUserUseCase {
-        return  GetUserUseCase(repository)
-    }
+    fun providesSaveBinnacleUseCase(repository: DatabaseRepository): SaveBinnacleUseCase =
+        SaveBinnacleUseCase(repository)
 
     @Provides
-    fun providesSaveUserUseCase(repository: UsersRepository) : SaveUserUseCase{
-        return SaveUserUseCase(repository)
-    }
+    fun providesGetBinnaclesUseCase(repository: DatabaseRepository): GetBinnaclesUseCase =
+        GetBinnaclesUseCase(repository)
+
+    @Provides
+    fun providesDeleteBinnacleUseCase(repository: DatabaseRepository): DeleteBinnacleUseCase =
+        DeleteBinnacleUseCase(repository)
+
+    @Provides
+    fun providesSaveCompanyUseCase(repository: DatabaseRepository): SaveCompanyUseCase =
+        SaveCompanyUseCase(repository)
+
+    @Provides
+    fun providesGetCompanyUseCase(repository: DatabaseRepository): GetCompanyUseCase =
+        GetCompanyUseCase(repository)
+
+    @Provides
+    fun providesDeleteCompaniesUseCase(repository: DatabaseRepository): DeleteCompaniesUseCase =
+        DeleteCompaniesUseCase(repository)
+
 }

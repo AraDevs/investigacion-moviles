@@ -1,4 +1,4 @@
-package com.aradevs.domain
+package com.aradevs.domain.coroutines
 
 sealed class Status<out T> {
     class Initial<T> : Status<T>()

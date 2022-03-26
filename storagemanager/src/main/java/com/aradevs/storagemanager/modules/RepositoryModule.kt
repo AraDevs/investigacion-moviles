@@ -1,7 +1,7 @@
 package com.aradevs.storagemanager.modules
 
-import com.aradevs.storagemanager.datasources.UserLocalDataSource
-import com.aradevs.storagemanager.repositories.UsersRepository
+import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
+import com.aradevs.storagemanager.repositories.DatabaseRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class RepositoryModule {
     @Provides
-    fun providesUsersRepository(localDataSource: UserLocalDataSource): UsersRepository {
-        return UsersRepository(localDataSource)
+    fun providesDatabaseRepository(localDataSource: DatabaseLocalDataSource): DatabaseRepository {
+        return DatabaseRepository(localDataSource)
     }
 }

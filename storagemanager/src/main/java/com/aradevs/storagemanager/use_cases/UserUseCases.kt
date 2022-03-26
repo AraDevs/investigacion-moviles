@@ -1,13 +1,31 @@
 package com.aradevs.storagemanager.use_cases
 
-import com.aradevs.storagemanager.repositories.UsersRepository
+import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.domain.general.Company
+import com.aradevs.storagemanager.repositories.DatabaseRepository
 
-class GetUserUseCase(private val repository: UsersRepository) {
-    suspend operator fun invoke(username: String, password: String) =
-        repository.getUser(username, password)
+class SaveBinnacleUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke(binnacle: Binnacle) =
+        repository.saveBinnacle(binnacle)
 }
 
-class SaveUserUseCase(private val repository: UsersRepository) {
-    suspend operator fun invoke(username: String, password: String) =
-        repository.saveUser(username, password)
+class GetBinnaclesUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke() = repository.getBinnacles()
 }
+
+class DeleteBinnacleUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke(id: Int) = repository.deleteBinnacle(id)
+}
+
+class SaveCompanyUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke(company: Company) = repository.saveCompany(company)
+}
+
+class GetCompanyUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke() = repository.getCompany()
+}
+
+class DeleteCompaniesUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke() = repository.deleteCompanies()
+}
+

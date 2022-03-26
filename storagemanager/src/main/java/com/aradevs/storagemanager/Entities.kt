@@ -1,13 +1,27 @@
 package com.aradevs.storagemanager
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.util.Date
 
-@Entity(tableName = "users", indices = [Index(value = ["username"], unique = true)])
-data class UserEntity(
+@Entity(tableName = "binnacles")
+data class BinnacleEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val username: String,
-    val password: String,
+    val description: String,
+    @ColumnInfo(name="init_date")
+    val initDate: Date,
+    @ColumnInfo(name="end_date")
+    val endDate: Date
+)
+
+@Entity(tableName = "companies")
+data class CompanyEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val name: String,
+    val description: String?,
+    @ColumnInfo(name="init_date")
+    val initDate: Date,
 )

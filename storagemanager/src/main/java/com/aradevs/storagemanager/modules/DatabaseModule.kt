@@ -2,8 +2,8 @@ package com.aradevs.storagemanager.modules
 
 import android.content.Context
 import com.aradevs.storagemanager.AppDatabase
-import com.aradevs.storagemanager.datasources.implementations.UserLocalDataSourceImpl
-import com.aradevs.storagemanager.datasources.UserLocalDataSource
+import com.aradevs.storagemanager.datasources.implementations.DatabaseLocalDataSourceImpl
+import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ class DatabaseModule {
     }
 
     @Provides
-    fun providesLocalDataSourceImpl(db: AppDatabase): UserLocalDataSource {
-        return UserLocalDataSourceImpl(db)
+    fun providesLocalDataSourceImpl(db: AppDatabase): DatabaseLocalDataSource {
+        return DatabaseLocalDataSourceImpl(db)
     }
 }
