@@ -14,8 +14,8 @@ interface DatabaseDao {
     @Query("SELECT * FROM binnacles")
     suspend fun getBinnacles(): List<BinnacleEntity>
 
-    @Query("DELETE FROM binnacles where id = :id")
-    suspend fun deleteBinnacle(id: Int)
+    @Query("DELETE FROM binnacles")
+    suspend fun deleteBinnacles()
 
     @Insert
     suspend fun saveCompany(companyEntity: CompanyEntity)

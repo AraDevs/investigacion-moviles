@@ -1,34 +1,28 @@
 package com.aradevs.investigacion_moviles.dialogs
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.aradevs.domain.general.Company
-import com.aradevs.investigacion_moviles.databinding.AddCompanyDialogBinding
+import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.investigacion_moviles.databinding.AddBinnacleDialogBinding
 import com.c3rberuss.androidutils.base_views.BaseDialogFragment
 import java.util.*
 
 /**
- * [AddCompanyDialog] Dialog that should be displayed when [Company] data is needed
+ * [AddBinnacleDialog] Dialog that should be displayed when [Binnacle] data is requested
  */
-class AddCompanyDialog : BaseDialogFragment() {
+class AddBinnacleDialog : BaseDialogFragment() {
 
-    private lateinit var binding: AddCompanyDialogBinding
-    private lateinit var onTap: (Company) -> Unit
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        isCancelable = false
-        return super.onCreateDialog(savedInstanceState)
-    }
+    private lateinit var binding: AddBinnacleDialogBinding
+    private lateinit var onTap: (Binnacle) -> Unit
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = AddCompanyDialogBinding.inflate(inflater, container, false)
+        binding = AddBinnacleDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -38,7 +32,10 @@ class AddCompanyDialog : BaseDialogFragment() {
             //TODO: Add validations
             //TODO: Open DatePickerDialog on date edit text
             save.setOnClickListener {
-                onTap(Company(0, name.text.toString(), description.text.toString(), Date()))
+                onTap(Binnacle(0, binding.description.text.toString(), Date(), Date()))
+                dismiss()
+            }
+            cancel.setOnClickListener {
                 dismiss()
             }
         }
@@ -46,8 +43,8 @@ class AddCompanyDialog : BaseDialogFragment() {
 
 
     companion object {
-        fun newInstance(onTap: (Company) -> Unit): AddCompanyDialog {
-            return AddCompanyDialog().apply {
+        fun newInstance(onTap: (Binnacle) -> Unit): AddBinnacleDialog {
+            return AddBinnacleDialog().apply {
                 this.onTap = onTap
             }
         }

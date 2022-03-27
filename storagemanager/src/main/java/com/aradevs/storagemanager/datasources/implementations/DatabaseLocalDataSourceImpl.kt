@@ -27,9 +27,9 @@ class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDa
         }
     }
 
-    override suspend fun deleteBinnacle(id: Int): Status<Unit> {
+    override suspend fun deleteBinnacles(): Status<Unit> {
         return try {
-            db.getDatabaseDao().deleteBinnacle(id)
+            db.getDatabaseDao().deleteBinnacles()
             Status.Success(Unit)
         } catch (e: Exception) {
             Status.Error(e)

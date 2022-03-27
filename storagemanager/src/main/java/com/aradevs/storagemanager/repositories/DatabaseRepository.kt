@@ -10,7 +10,7 @@ class DatabaseRepository(private val databaseLocalDataSource: DatabaseLocalDataS
 
     suspend fun getBinnacles() = databaseLocalDataSource.getBinnacles()
 
-    suspend fun deleteBinnacle(id: Int) = databaseLocalDataSource.deleteBinnacle(id)
+    suspend fun deleteBinnacles() = databaseLocalDataSource.deleteBinnacles()
 
     suspend fun saveCompany(company: Company) = databaseLocalDataSource.saveCompany(company)
 

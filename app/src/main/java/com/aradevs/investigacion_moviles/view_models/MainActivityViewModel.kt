@@ -17,7 +17,7 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
     private val saveBinnacleUseCase: SaveBinnacleUseCase,
     private val getBinnaclesUseCase: GetBinnaclesUseCase,
-    private val deleteBinnacleUseCase: DeleteBinnacleUseCase,
+    private val deleteBinnaclesUseCase: DeleteBinnaclesUseCase,
     private val saveCompanyUseCase: SaveCompanyUseCase,
     private val getCompanyUseCase: GetCompanyUseCase,
     private val deleteCompaniesUseCase: DeleteCompaniesUseCase,
@@ -26,12 +26,6 @@ class MainActivityViewModel @Inject constructor(
     //region live data variables
     private val _binnacleStatus: MutableLiveData<Status<List<Binnacle>>> =
         MutableLiveData(Status.Loading())
-
-    /**
-     * Value to be observed for [Binnacle] related transactions
-     */
-    val binnacleStatus: LiveData<Status<List<Binnacle>>> get() = _binnacleStatus
-
     private val _companyStatus: MutableLiveData<Status<Company?>> =
         MutableLiveData(Status.Loading())
 
@@ -39,6 +33,11 @@ class MainActivityViewModel @Inject constructor(
      * Value to be observed for [Company] related transactions
      */
     val companyStatus: LiveData<Status<Company?>> get() = _companyStatus
+
+    /**
+     * Value to be observed for [Binnacle] related transactions
+     */
+    val binnacleStatus: LiveData<Status<List<Binnacle>>> get() = _binnacleStatus
     //endregion
 
     /**
@@ -73,7 +72,7 @@ class MainActivityViewModel @Inject constructor(
             _binnacleStatus.postValue(Status.Loading())
             when (val status = saveBinnacleUseCase(binnacle)) {
                 is Status.Success -> getBinnacles()
-                is Status.Error ->  _binnacleStatus.postValue(Status.Error(status.exception))
+                is Status.Error -> _binnacleStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }
             }
@@ -85,13 +84,11 @@ class MainActivityViewModel @Inject constructor(
      * and [Status.Error] in case something happens while deleting the registry.
      * If the result is [Status.Success], [getBinnacles] will be called to obtain the latest
      * data from the database
-     *
-     * @param id represents the id of the binnacle to be deleted
      */
-    fun deleteBinnacle(id: Int) {
+    fun deleteBinnacles() {
         viewModelScope.launch(Dispatchers.IO) {
             _binnacleStatus.postValue(Status.Loading())
-            when (val status = deleteBinnacleUseCase(id)) {
+            when (val status = deleteBinnaclesUseCase()) {
                 is Status.Success -> getBinnacles()
                 is Status.Error -> _binnacleStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
@@ -149,7 +146,7 @@ class MainActivityViewModel @Inject constructor(
             _companyStatus.postValue(Status.Loading())
             when (val status = deleteCompaniesUseCase()) {
                 is Status.Success -> getCompany()
-                is Status.Error ->  _binnacleStatus.postValue(Status.Error(status.exception))
+                is Status.Error -> _binnacleStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }
             }

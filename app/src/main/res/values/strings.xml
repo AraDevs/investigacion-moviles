@@ -5,4 +5,13 @@
     <string name="description">Descripción (opcional)</string>
     <string name="init_date">Fecha de inicio</string>
     <string name="save">Guardar</string>
+    <string name="binnacles">Bitacoras</string>
+    <string name="empty_string">- - -</string>
+    <string name="add_binnacle">Add binnacle</string>
+    <string name="binnacle_description">Binnacle description</string>
+    <string name="empty_binnacles">Nada que mostrar, agrega una bitacora para verla aca</string>
+    <string name="binnacle">Bitacora</string>
+    <string name="description_mandatory">Descripción</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_all">Eliminar todo</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.aradevs.storagemanager.modules
 
-import com.aradevs.storagemanager.repositories.DatabaseRepository
 import com.aradevs.storagemanager.use_cases.*
+import com.aradevs.storagemanager.repositories.DatabaseRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,8 +19,8 @@ class UseCasesModule {
         GetBinnaclesUseCase(repository)
 
     @Provides
-    fun providesDeleteBinnacleUseCase(repository: DatabaseRepository): DeleteBinnacleUseCase =
-        DeleteBinnacleUseCase(repository)
+    fun providesDeleteBinnacleUseCase(repository: DatabaseRepository): DeleteBinnaclesUseCase =
+        DeleteBinnaclesUseCase(repository)
 
     @Provides
     fun providesSaveCompanyUseCase(repository: DatabaseRepository): SaveCompanyUseCase =

@@ -13,8 +13,8 @@ class GetBinnaclesUseCase(private val repository: DatabaseRepository) {
     suspend operator fun invoke() = repository.getBinnacles()
 }
 
-class DeleteBinnacleUseCase(private val repository: DatabaseRepository) {
-    suspend operator fun invoke(id: Int) = repository.deleteBinnacle(id)
+class DeleteBinnaclesUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke() = repository.deleteBinnacles()
 }
 
 class SaveCompanyUseCase(private val repository: DatabaseRepository) {
