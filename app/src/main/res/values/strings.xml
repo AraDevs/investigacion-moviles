@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">investigacion-moviles</string>
+    <string name="company">Empresa</string>
+    <string name="name">Nombre</string>
+    <string name="description">Descripción (opcional)</string>
+    <string name="init_date">Fecha de inicio</string>
+    <string name="save">Guardar</string>
 </resources>

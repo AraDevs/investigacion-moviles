@@ -47,7 +47,7 @@ class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDa
 
     override suspend fun getCompany(): Status<Company?> {
         return try {
-            val company = db.getDatabaseDao().getCompany().toDomain()
+            val company = db.getDatabaseDao().getCompany()?.toDomain()
             Status.Success(company)
         } catch (e: Exception) {
             Status.Error(e)

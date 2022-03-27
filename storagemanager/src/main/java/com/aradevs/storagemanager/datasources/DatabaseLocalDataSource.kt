@@ -1,6 +1,5 @@
 package com.aradevs.storagemanager.datasources
 
-import com.aradevs.domain.User
 import com.aradevs.domain.binnacles.Binnacle
 import com.aradevs.domain.coroutines.Status
 import com.aradevs.domain.general.Company

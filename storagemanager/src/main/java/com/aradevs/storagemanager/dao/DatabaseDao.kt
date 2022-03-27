@@ -21,7 +21,7 @@ interface DatabaseDao {
     suspend fun saveCompany(companyEntity: CompanyEntity)
 
     @Query("SELECT * FROM companies LIMIT 1")
-    suspend fun getCompany(): CompanyEntity
+    suspend fun getCompany(): CompanyEntity?
 
     @Query("DELETE FROM companies")
     suspend fun deleteCompanies()
