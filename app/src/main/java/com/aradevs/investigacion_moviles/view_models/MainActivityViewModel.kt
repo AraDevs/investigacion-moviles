@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.domain.logs.Log
 import com.aradevs.domain.coroutines.Status
 import com.aradevs.domain.general.Company
 import com.aradevs.storagemanager.use_cases.*
@@ -24,7 +24,7 @@ class MainActivityViewModel @Inject constructor(
 ) : ViewModel() {
 
     //region live data variables
-    private val _binnacleStatus: MutableLiveData<Status<List<Binnacle>>> =
+    private val _logStatus: MutableLiveData<Status<List<Log>>> =
         MutableLiveData(Status.Loading())
     private val _companyStatus: MutableLiveData<Status<Company?>> =
         MutableLiveData(Status.Loading())
@@ -35,9 +35,9 @@ class MainActivityViewModel @Inject constructor(
     val companyStatus: LiveData<Status<Company?>> get() = _companyStatus
 
     /**
-     * Value to be observed for [Binnacle] related transactions
+     * Value to be observed for [Log] related transactions
      */
-    val binnacleStatus: LiveData<Status<List<Binnacle>>> get() = _binnacleStatus
+    val logStatus: LiveData<Status<List<Log>>> get() = _logStatus
     //endregion
 
     /**
@@ -48,10 +48,10 @@ class MainActivityViewModel @Inject constructor(
      */
     fun getBinnacles() {
         viewModelScope.launch(Dispatchers.IO) {
-            _binnacleStatus.postValue(Status.Loading())
+            _logStatus.postValue(Status.Loading())
             when (val status = getBinnaclesUseCase()) {
-                is Status.Success -> _binnacleStatus.postValue(status)
-                is Status.Error -> _binnacleStatus.postValue(status)
+                is Status.Success -> _logStatus.postValue(status)
+                is Status.Error -> _logStatus.postValue(status)
                 else -> {
                     //do nothing
                 }
@@ -60,19 +60,19 @@ class MainActivityViewModel @Inject constructor(
     }
 
     /**
-     * Retrieves [Status.Success] if the request to save the [Binnacle] was successful
+     * Retrieves [Status.Success] if the request to save the [Log] was successful
      * and [Status.Error] in case something happens while saving the data.
      * If the result is [Status.Success], [getBinnacles] will be called to obtain the latest
      * data from the database
      *
-     * @param binnacle represents the binnacle to be saved in the database
+     * @param log represents the binnacle to be saved in the database
      */
-    fun saveBinnacle(binnacle: Binnacle) {
+    fun saveBinnacle(log: Log) {
         viewModelScope.launch(Dispatchers.IO) {
-            _binnacleStatus.postValue(Status.Loading())
-            when (val status = saveBinnacleUseCase(binnacle)) {
+            _logStatus.postValue(Status.Loading())
+            when (val status = saveBinnacleUseCase(log)) {
                 is Status.Success -> getBinnacles()
-                is Status.Error -> _binnacleStatus.postValue(Status.Error(status.exception))
+                is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }
             }
@@ -80,17 +80,17 @@ class MainActivityViewModel @Inject constructor(
     }
 
     /**
-     * Retrieves [Status.Success] if the request to delete the [Binnacle] was successful
+     * Retrieves [Status.Success] if the request to delete the [Log] was successful
      * and [Status.Error] in case something happens while deleting the registry.
      * If the result is [Status.Success], [getBinnacles] will be called to obtain the latest
      * data from the database
      */
     fun deleteBinnacles() {
         viewModelScope.launch(Dispatchers.IO) {
-            _binnacleStatus.postValue(Status.Loading())
+            _logStatus.postValue(Status.Loading())
             when (val status = deleteBinnaclesUseCase()) {
                 is Status.Success -> getBinnacles()
-                is Status.Error -> _binnacleStatus.postValue(Status.Error(status.exception))
+                is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }
             }
@@ -146,7 +146,7 @@ class MainActivityViewModel @Inject constructor(
             _companyStatus.postValue(Status.Loading())
             when (val status = deleteCompaniesUseCase()) {
                 is Status.Success -> getCompany()
-                is Status.Error -> _binnacleStatus.postValue(Status.Error(status.exception))
+                is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }
             }

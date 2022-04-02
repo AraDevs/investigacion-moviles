@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
 
-@Entity(tableName = "binnacles")
-data class BinnacleEntity(
+@Entity(tableName = "logs")
+data class LogEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val description: String,

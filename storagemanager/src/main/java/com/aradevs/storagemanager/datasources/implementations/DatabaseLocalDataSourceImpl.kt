@@ -1,6 +1,6 @@
 package com.aradevs.storagemanager.datasources.implementations
 
-import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.domain.logs.Log
 import com.aradevs.domain.coroutines.Status
 import com.aradevs.domain.general.Company
 import com.aradevs.storagemanager.AppDatabase
@@ -9,16 +9,16 @@ import com.aradevs.storagemanager.data_handling.toDomain
 import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
 
 class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDataSource {
-    override suspend fun saveBinnacle(binnacle: Binnacle): Status<Unit> {
+    override suspend fun saveBinnacle(log: Log): Status<Unit> {
         return try {
-            db.getDatabaseDao().saveBinnacle(binnacle.fromDomain())
+            db.getDatabaseDao().saveBinnacle(log.fromDomain())
             Status.Success(Unit)
         } catch (e: Exception) {
             Status.Error(e)
         }
     }
 
-    override suspend fun getBinnacles(): Status<List<Binnacle>> {
+    override suspend fun getBinnacles(): Status<List<Log>> {
         return try {
             val data = db.getDatabaseDao().getBinnacles().map { it.toDomain() }
             Status.Success(data)

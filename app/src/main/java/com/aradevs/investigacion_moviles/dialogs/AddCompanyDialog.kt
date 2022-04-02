@@ -110,7 +110,7 @@ class AddCompanyDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListene
 
     @SuppressLint("SetTextI18n")
     override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
-        val currentMonth = month + 1;
+        val currentMonth = month + 1
         binding.initDate.setText("$day-$currentMonth-$year")
         timePickerDialog.show()
     }

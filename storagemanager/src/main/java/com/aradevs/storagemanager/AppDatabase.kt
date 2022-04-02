@@ -8,8 +8,8 @@ import androidx.room.TypeConverters
 import com.aradevs.storagemanager.dao.DatabaseDao
 
 @Database(
-    entities = [BinnacleEntity::class, CompanyEntity::class],
-    version = 1
+    entities = [LogEntity::class, CompanyEntity::class],
+    version = 2
 )
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {

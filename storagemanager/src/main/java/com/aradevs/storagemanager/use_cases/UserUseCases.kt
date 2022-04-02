@@ -1,12 +1,12 @@
 package com.aradevs.storagemanager.use_cases
 
-import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.domain.logs.Log
 import com.aradevs.domain.general.Company
 import com.aradevs.storagemanager.repositories.DatabaseRepository
 
 class SaveBinnacleUseCase(private val repository: DatabaseRepository) {
-    suspend operator fun invoke(binnacle: Binnacle) =
-        repository.saveBinnacle(binnacle)
+    suspend operator fun invoke(log: Log) =
+        repository.saveBinnacle(log)
 }
 
 class GetBinnaclesUseCase(private val repository: DatabaseRepository) {

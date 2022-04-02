@@ -4,12 +4,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.domain.logs.Log
 import com.aradevs.domain.coroutines.Status
 import com.aradevs.domain.general.Company
-import com.aradevs.investigacion_moviles.adapters.BinnaclesAdapter
+import com.aradevs.investigacion_moviles.adapters.LogsAdapter
 import com.aradevs.investigacion_moviles.databinding.ActivityMainBinding
-import com.aradevs.investigacion_moviles.dialogs.AddBinnacleDialog
+import com.aradevs.investigacion_moviles.dialogs.AddLogDialog
 import com.aradevs.investigacion_moviles.dialogs.AddCompanyDialog
 import com.aradevs.investigacion_moviles.view_models.MainActivityViewModel
 import com.c3rberuss.androidutils.gone
@@ -21,8 +21,8 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val binding: ActivityMainBinding by viewBinding()
     private val viewModel: MainActivityViewModel by viewModels()
-    private val binnaclesAdapter: BinnaclesAdapter by lazy {
-        BinnaclesAdapter()
+    private val logsAdapter: LogsAdapter by lazy {
+        LogsAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      */
     private fun setupUiBinding() {
         binding.addBinnacle.setOnClickListener {
-            AddBinnacleDialog.newInstance {
+            AddLogDialog.newInstance {
                 viewModel.saveBinnacle(it)
             }.show(supportFragmentManager, "add_binnacle_dialog")
         }
@@ -72,10 +72,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     /**
-     * Checks if the provided [Binnacle] list is null or empty and shows a message if that condition is met,
+     * Checks if the provided [Log] list is null or empty and shows a message if that condition is met,
      * otherwise it will fill the binnacle list with the provided data
      */
-    private fun binnaclesDataBinding(items: List<Binnacle>) {
+    private fun binnaclesDataBinding(items: List<Log>) {
         when {
             items.isNullOrEmpty() -> {
                 binding.noBinnacles.visible()
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
             items.isNotEmpty() -> {
                 binding.noBinnacles.gone()
-                binding.binnacleList.adapter = binnaclesAdapter
-                binnaclesAdapter.submitList(items.reversed())
+                binding.binnacleList.adapter = logsAdapter
+                logsAdapter.submitList(items.reversed())
             }
         }
     }
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      * Observes live data provided from view model to detect binnacle related state changes
      */
     private fun observeBinnacleStatus() {
-        viewModel.binnacleStatus.observe(this) {
+        viewModel.logStatus.observe(this) {
             when (it) {
                 is Status.Success -> {
                     binding.loader.root.gone()

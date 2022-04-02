@@ -50,7 +50,7 @@
             android:paddingVertical="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="4"
-            tools:listitem="@layout/binnacle_item" />
+            tools:listitem="@layout/log_item" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

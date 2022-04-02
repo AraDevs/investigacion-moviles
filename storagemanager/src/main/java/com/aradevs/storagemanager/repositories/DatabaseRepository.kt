@@ -1,12 +1,12 @@
 package com.aradevs.storagemanager.repositories
 
-import com.aradevs.domain.binnacles.Binnacle
+import com.aradevs.domain.logs.Log
 import com.aradevs.domain.general.Company
 import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
 
 class DatabaseRepository(private val databaseLocalDataSource: DatabaseLocalDataSource) {
-    suspend fun saveBinnacle(binnacle: Binnacle) =
-        databaseLocalDataSource.saveBinnacle(binnacle)
+    suspend fun saveBinnacle(log: Log) =
+        databaseLocalDataSource.saveBinnacle(log)
 
     suspend fun getBinnacles() = databaseLocalDataSource.getBinnacles()
 
