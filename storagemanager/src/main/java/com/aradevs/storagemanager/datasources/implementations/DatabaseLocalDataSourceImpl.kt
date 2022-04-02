@@ -9,27 +9,27 @@ import com.aradevs.storagemanager.data_handling.toDomain
 import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
 
 class DatabaseLocalDataSourceImpl(private val db: AppDatabase) : DatabaseLocalDataSource {
-    override suspend fun saveBinnacle(log: Log): Status<Unit> {
+    override suspend fun saveLog(log: Log): Status<Unit> {
         return try {
-            db.getDatabaseDao().saveBinnacle(log.fromDomain())
+            db.getDatabaseDao().saveLog(log.fromDomain())
             Status.Success(Unit)
         } catch (e: Exception) {
             Status.Error(e)
         }
     }
 
-    override suspend fun getBinnacles(): Status<List<Log>> {
+    override suspend fun getLogs(): Status<List<Log>> {
         return try {
-            val data = db.getDatabaseDao().getBinnacles().map { it.toDomain() }
+            val data = db.getDatabaseDao().getLogs().map { it.toDomain() }
             Status.Success(data)
         } catch (e: Exception) {
             Status.Error(e)
         }
     }
 
-    override suspend fun deleteBinnacles(): Status<Unit> {
+    override suspend fun deleteLogs(): Status<Unit> {
         return try {
-            db.getDatabaseDao().deleteBinnacles()
+            db.getDatabaseDao().deleteLogs()
             Status.Success(Unit)
         } catch (e: Exception) {
             Status.Error(e)

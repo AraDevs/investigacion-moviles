@@ -5,12 +5,12 @@ import com.aradevs.domain.general.Company
 import com.aradevs.storagemanager.datasources.DatabaseLocalDataSource
 
 class DatabaseRepository(private val databaseLocalDataSource: DatabaseLocalDataSource) {
-    suspend fun saveBinnacle(log: Log) =
-        databaseLocalDataSource.saveBinnacle(log)
+    suspend fun saveLog(log: Log) =
+        databaseLocalDataSource.saveLog(log)
 
-    suspend fun getBinnacles() = databaseLocalDataSource.getBinnacles()
+    suspend fun getLogs() = databaseLocalDataSource.getLogs()
 
-    suspend fun deleteBinnacles() = databaseLocalDataSource.deleteBinnacles()
+    suspend fun deleteLogs() = databaseLocalDataSource.deleteLogs()
 
     suspend fun saveCompany(company: Company) = databaseLocalDataSource.saveCompany(company)
 

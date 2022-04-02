@@ -11,16 +11,16 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class UseCasesModule {
     @Provides
-    fun providesSaveBinnacleUseCase(repository: DatabaseRepository): SaveBinnacleUseCase =
-        SaveBinnacleUseCase(repository)
+    fun providesSaveLogUseCase(repository: DatabaseRepository): SaveLogUseCase =
+        SaveLogUseCase(repository)
 
     @Provides
-    fun providesGetBinnaclesUseCase(repository: DatabaseRepository): GetBinnaclesUseCase =
-        GetBinnaclesUseCase(repository)
+    fun providesGetLogsUseCase(repository: DatabaseRepository): GetLogsUseCase =
+        GetLogsUseCase(repository)
 
     @Provides
-    fun providesDeleteBinnacleUseCase(repository: DatabaseRepository): DeleteBinnaclesUseCase =
-        DeleteBinnaclesUseCase(repository)
+    fun providesDeleteLogsUseCase(repository: DatabaseRepository): DeleteLogsUseCase =
+        DeleteLogsUseCase(repository)
 
     @Provides
     fun providesSaveCompanyUseCase(repository: DatabaseRepository): SaveCompanyUseCase =

@@ -4,17 +4,17 @@ import com.aradevs.domain.logs.Log
 import com.aradevs.domain.general.Company
 import com.aradevs.storagemanager.repositories.DatabaseRepository
 
-class SaveBinnacleUseCase(private val repository: DatabaseRepository) {
+class SaveLogUseCase(private val repository: DatabaseRepository) {
     suspend operator fun invoke(log: Log) =
-        repository.saveBinnacle(log)
+        repository.saveLog(log)
 }
 
-class GetBinnaclesUseCase(private val repository: DatabaseRepository) {
-    suspend operator fun invoke() = repository.getBinnacles()
+class GetLogsUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke() = repository.getLogs()
 }
 
-class DeleteBinnaclesUseCase(private val repository: DatabaseRepository) {
-    suspend operator fun invoke() = repository.deleteBinnacles()
+class DeleteLogsUseCase(private val repository: DatabaseRepository) {
+    suspend operator fun invoke() = repository.deleteLogs()
 }
 
 class SaveCompanyUseCase(private val repository: DatabaseRepository) {

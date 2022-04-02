@@ -15,9 +15,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val saveBinnacleUseCase: SaveBinnacleUseCase,
-    private val getBinnaclesUseCase: GetBinnaclesUseCase,
-    private val deleteBinnaclesUseCase: DeleteBinnaclesUseCase,
+    private val saveLogUseCase: SaveLogUseCase,
+    private val getLogsUseCase: GetLogsUseCase,
+    private val deleteLogsUseCase: DeleteLogsUseCase,
     private val saveCompanyUseCase: SaveCompanyUseCase,
     private val getCompanyUseCase: GetCompanyUseCase,
     private val deleteCompaniesUseCase: DeleteCompaniesUseCase,
@@ -49,7 +49,7 @@ class MainActivityViewModel @Inject constructor(
     fun getBinnacles() {
         viewModelScope.launch(Dispatchers.IO) {
             _logStatus.postValue(Status.Loading())
-            when (val status = getBinnaclesUseCase()) {
+            when (val status = getLogsUseCase()) {
                 is Status.Success -> _logStatus.postValue(status)
                 is Status.Error -> _logStatus.postValue(status)
                 else -> {
@@ -70,7 +70,7 @@ class MainActivityViewModel @Inject constructor(
     fun saveBinnacle(log: Log) {
         viewModelScope.launch(Dispatchers.IO) {
             _logStatus.postValue(Status.Loading())
-            when (val status = saveBinnacleUseCase(log)) {
+            when (val status = saveLogUseCase(log)) {
                 is Status.Success -> getBinnacles()
                 is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
@@ -88,7 +88,7 @@ class MainActivityViewModel @Inject constructor(
     fun deleteBinnacles() {
         viewModelScope.launch(Dispatchers.IO) {
             _logStatus.postValue(Status.Loading())
-            when (val status = deleteBinnaclesUseCase()) {
+            when (val status = deleteLogsUseCase()) {
                 is Status.Success -> getBinnacles()
                 is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing

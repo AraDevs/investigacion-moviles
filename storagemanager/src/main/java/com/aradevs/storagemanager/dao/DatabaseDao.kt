@@ -9,13 +9,13 @@ import com.aradevs.storagemanager.CompanyEntity
 @Dao
 interface DatabaseDao {
     @Insert
-    suspend fun saveBinnacle(logEntity: LogEntity)
+    suspend fun saveLog(logEntity: LogEntity)
 
     @Query("SELECT * FROM logs")
-    suspend fun getBinnacles(): List<LogEntity>
+    suspend fun getLogs(): List<LogEntity>
 
     @Query("DELETE FROM logs")
-    suspend fun deleteBinnacles()
+    suspend fun deleteLogs()
 
     @Insert
     suspend fun saveCompany(companyEntity: CompanyEntity)
