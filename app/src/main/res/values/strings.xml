@@ -19,4 +19,5 @@
     <string name="parse_error_add_company">Error al convertir la fecha provista al formato de dd-mm-yyyy hh:mm por favor revisar el campo</string>
     <string name="validation_error_add_log">Por favor llenar los campos de nombre, fecha de inicio y fecha fin</string>
     <string name="parse_error_add_log">Ocurrio un error al convertir las fechas a dd-mm-yyyy hh:mm, por favor verifique las fechas</string>
+    <string name="error_date_range">La fecha inicial es mayor que la fecha final</string>
 </resources>

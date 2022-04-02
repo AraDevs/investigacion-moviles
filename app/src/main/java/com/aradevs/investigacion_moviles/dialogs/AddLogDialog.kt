@@ -14,6 +14,7 @@ import com.aradevs.investigacion_moviles.R
 import com.aradevs.investigacion_moviles.databinding.AddLogDialogBinding
 import com.c3rberuss.androidutils.base_views.BaseDialogFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,10 +53,18 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
             save.setOnClickListener {
                 try {
                     if (validator()) {
+                        val initDate: Date = format.parse(binding.initDate.text.toString())!!
+                        val endDate: Date = format.parse(binding.endDate.text.toString())!!
+                        if (initDate.after(endDate)) {
+                            Snackbar.make(binding.root,
+                                getString(R.string.error_date_range),
+                                LENGTH_SHORT).show()
+                            return@setOnClickListener
+                        }
                         onTap(Log(0,
                             binding.description.text.toString(),
-                            format.parse(binding.initDate.text.toString())!!,
-                            format.parse(binding.endDate.text.toString())!!))
+                            initDate,
+                            endDate))
                         dismiss()
                     } else {
                         Snackbar.make(binding.root,
@@ -83,15 +92,9 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
         }
     }
 
-
-    companion object {
-        fun newInstance(onTap: (Log) -> Unit): AddLogDialog {
-            return AddLogDialog().apply {
-                this.onTap = onTap
-            }
-        }
-    }
-
+    /**
+     * Validates if the required fields are not empty
+     */
     private fun validator(): Boolean {
         return when {
             binding.description.text.isNullOrEmpty() -> false
@@ -101,20 +104,29 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
         }
     }
 
+    /**
+     * Setting up calendar dialog
+     */
     private fun setupCalendar() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONDAY) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         dateDialog = DatePickerDialog(requireContext(), this, year, month - 1, day)
-        dateDialog.datePicker.minDate = calendar.time.time
     }
 
+    /**
+     * Setting up the time picker dialog
+     */
     private fun setupTime() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
         timePickerDialog = TimePickerDialog(requireContext(), this, hour, minute, true)
     }
 
+    /**
+     * Listening to the onDateSet method of [DatePickerDialog.setOnDateSetListener] to set the selected date
+     * into the specified EditText, this method will inflate the [TimePickerDialog] afterwards
+     */
     @SuppressLint("SetTextI18n")
     override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
         val currentMonth = month + 1
@@ -126,6 +138,10 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
         timePickerDialog.show()
     }
 
+    /**
+     * Listening to the onTimeSet method of [TimePickerDialog.onTimeChanged] to set the selected time into
+     * the specified EditText
+     */
     @SuppressLint("SetTextI18n")
     override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
 
@@ -147,5 +163,16 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
             }
         }
 
+    }
+
+    /**
+     * Companion object that receives the onTap method to be executed on [binding] save tap
+     */
+    companion object {
+        fun newInstance(onTap: (Log) -> Unit): AddLogDialog {
+            return AddLogDialog().apply {
+                this.onTap = onTap
+            }
+        }
     }
 }

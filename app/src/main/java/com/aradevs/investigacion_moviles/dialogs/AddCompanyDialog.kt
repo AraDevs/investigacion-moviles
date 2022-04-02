@@ -78,6 +78,9 @@ class AddCompanyDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListene
         }
     }
 
+    /**
+     * Validates if the required fields are not empty
+     */
     private fun validator(): Boolean {
         return when {
             binding.name.text.isNullOrEmpty() -> false
@@ -86,29 +89,29 @@ class AddCompanyDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListene
         }
     }
 
-
-    companion object {
-        fun newInstance(onTap: (Company) -> Unit): AddCompanyDialog {
-            return AddCompanyDialog().apply {
-                this.onTap = onTap
-            }
-        }
-    }
-
+    /**
+     * Setting up calendar dialog
+     */
     private fun setupCalendar() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONDAY) + 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         dateDialog = DatePickerDialog(requireContext(), this, year, month - 1, day)
-        dateDialog.datePicker.minDate = calendar.time.time
     }
 
+    /**
+     * Setting up the time picker dialog
+     */
     private fun setupTime() {
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
         timePickerDialog = TimePickerDialog(requireContext(), this, hour, minute, true)
     }
 
+    /**
+     * Listening to the onDateSet method of [DatePickerDialog.setOnDateSetListener] to set the selected date
+     * into the specified EditText, this method will inflate the [TimePickerDialog] afterwards
+     */
     @SuppressLint("SetTextI18n")
     override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
         val currentMonth = month + 1
@@ -116,6 +119,10 @@ class AddCompanyDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListene
         timePickerDialog.show()
     }
 
+    /**
+     * Listening to the onTimeSet method of [TimePickerDialog.onTimeChanged] to set the selected time into
+     * the specified EditText
+     */
     @SuppressLint("SetTextI18n")
     override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
         val currentMinute = if (minute < 10) "0$minute" else minute
@@ -123,6 +130,17 @@ class AddCompanyDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListene
             binding.initDate.setText("${binding.initDate.text} $hour:00")
         } else {
             binding.initDate.setText("${binding.initDate.text} $hour:$currentMinute")
+        }
+    }
+
+    /**
+     * Companion object that receives the onTap method to be executed on [binding] save tap
+     */
+    companion object {
+        fun newInstance(onTap: (Company) -> Unit): AddCompanyDialog {
+            return AddCompanyDialog().apply {
+                this.onTap = onTap
+            }
         }
     }
 }
