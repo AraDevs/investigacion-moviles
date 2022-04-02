@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import com.aradevs.domain.general.Company
+import com.aradevs.investigacion_moviles.R
 import com.aradevs.investigacion_moviles.databinding.AddCompanyDialogBinding
 import com.c3rberuss.androidutils.base_views.BaseDialogFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
@@ -62,12 +63,12 @@ class AddCompanyDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListene
                         dismiss()
                     } else {
                         Snackbar.make(binding.root,
-                            "Por favor llenar los campos de nombre y fecha de inicio",
+                            getString(R.string.validation_error_add_company),
                             LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Snackbar.make(binding.root,
-                        "Error al convertir la fecha provista al formato de dd-mm-yyyy hh:mm por favor revisar el campo",
+                        getString(R.string.parse_error_add_company),
                         LENGTH_SHORT).show()
                 }
             }

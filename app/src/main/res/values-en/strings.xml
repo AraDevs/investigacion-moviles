@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="company">Company</string>
+    <string name="name">Name</string>
+    <string name="description">Description (optional)</string>
+    <string name="init_date">Init date</string>
+    <string name="due_date">Due date</string>
+    <string name="save">Save</string>
+    <string name="binnacles">Logbook</string>
+    <string name="empty_string">- - -</string>
+    <string name="add_binnacle">Add log</string>
+    <string name="binnacle_description">Binnacle description</string>
+    <string name="empty_binnacles">Nothing to show, add a log entry to display here</string>
+    <string name="binnacle">Log</string>
+    <string name="description_mandatory">Description</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_all">Delete all</string>
+    <string name="validation_error_add_company">Please fill the name and init date fields</string>
+    <string name="parse_error_add_company">Error while parsing the provided date to dd-mm-yyyy hh:ss, please check the date field</string>
+    <string name="validation_error_add_log">Please fill the name, init date and due date fields</string>
+    <string name="parse_error_add_log">Error while parsing the provided date to dd-mm-yyyy hh:ss, please check the init date and due date fields</string>
+</resources>

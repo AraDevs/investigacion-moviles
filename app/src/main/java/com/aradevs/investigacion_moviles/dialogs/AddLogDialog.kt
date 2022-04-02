@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import com.aradevs.domain.logs.Log
+import com.aradevs.investigacion_moviles.R
 import com.aradevs.investigacion_moviles.databinding.AddLogDialogBinding
 import com.c3rberuss.androidutils.base_views.BaseDialogFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -50,20 +51,20 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
 
             save.setOnClickListener {
                 try {
-                    if(validator()){
+                    if (validator()) {
                         onTap(Log(0,
                             binding.description.text.toString(),
                             format.parse(binding.initDate.text.toString())!!,
                             format.parse(binding.endDate.text.toString())!!))
                         dismiss()
-                    }else{
+                    } else {
                         Snackbar.make(binding.root,
-                            "Por favor llenar los campos de nombre, fecha de inicio y fecha fin",
+                            getString(R.string.validation_error_add_log),
                             BaseTransientBottomBar.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Snackbar.make(binding.root,
-                        "Ocurrio un error al convertir las fechas a dd-mm-yyyy hh:mm, por favor verifique las fechas",
+                        getString(R.string.parse_error_add_log),
                         BaseTransientBottomBar.LENGTH_SHORT).show()
                 }
             }

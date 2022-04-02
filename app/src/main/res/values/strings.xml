@@ -1,17 +1,22 @@
 <resources>
-    <string name="app_name">investigacion-moviles</string>
+    <string name="app_name" translatable="false">investigacion-moviles</string>
     <string name="company">Empresa</string>
     <string name="name">Nombre</string>
     <string name="description">Descripción (opcional)</string>
     <string name="init_date">Fecha de inicio</string>
+    <string name="due_date">Fecha fin</string>
     <string name="save">Guardar</string>
-    <string name="binnacles">Bitacoras</string>
+    <string name="binnacles">Bitácoras</string>
     <string name="empty_string">- - -</string>
-    <string name="add_binnacle">Add binnacle</string>
+    <string name="add_binnacle">Agregar bitácora</string>
     <string name="binnacle_description">Binnacle description</string>
-    <string name="empty_binnacles">Nada que mostrar, agrega una bitacora para verla aca</string>
-    <string name="binnacle">Bitacora</string>
+    <string name="empty_binnacles">Nada que mostrar, agrega una bitácora para verla aca</string>
+    <string name="binnacle">Bitácora</string>
     <string name="description_mandatory">Descripción</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_all">Eliminar todo</string>
+    <string name="validation_error_add_company">Por favor llenar los campos de nombre y fecha de inicio</string>
+    <string name="parse_error_add_company">Error al convertir la fecha provista al formato de dd-mm-yyyy hh:mm por favor revisar el campo</string>
+    <string name="validation_error_add_log">Por favor llenar los campos de nombre, fecha de inicio y fecha fin</string>
+    <string name="parse_error_add_log">Ocurrio un error al convertir las fechas a dd-mm-yyyy hh:mm, por favor verifique las fechas</string>
 </resources>
