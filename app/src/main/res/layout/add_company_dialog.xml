@@ -8,9 +8,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         app:cardCornerRadius="14dp"
         app:cardElevation="8dp"
-        android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,54 +26,60 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/company"
                     android:textColor="@color/black"
-                    android:textSize="22sp"/>
+                    android:textSize="22sp" />
+
                 <EditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:maxLines="1"
-                    android:background="@drawable/rounded_edit_text"
-                    android:importantForAutofill="no"
-                    android:paddingHorizontal="10dp"
-                    android:hint="@string/name"
                     android:layout_marginTop="8dp"
-                    android:inputType="text"/>
+                    android:background="@drawable/rounded_edit_text"
+                    android:hint="@string/name"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingHorizontal="10dp" />
+
                 <EditText
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:maxLines="1"
-                    android:background="@drawable/rounded_edit_text"
-                    android:importantForAutofill="no"
-                    android:paddingHorizontal="10dp"
-                    android:hint="@string/description"
                     android:layout_marginTop="8dp"
-                    android:inputType="text"/>
+                    android:background="@drawable/rounded_edit_text"
+                    android:hint="@string/description"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingHorizontal="10dp" />
+
                 <EditText
                     android:id="@+id/init_date"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:maxLines="1"
-                    android:background="@drawable/rounded_edit_text"
-                    android:importantForAutofill="no"
-                    android:paddingHorizontal="10dp"
-                    android:hint="@string/init_date"
                     android:layout_marginTop="8dp"
-                    android:inputType="text"
-                    tools:ignore="TextFields" />
+                    android:background="@drawable/rounded_edit_text"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="@string/init_date"
+                    android:importantForAutofill="no"
+                    android:maxLines="1"
+                    android:paddingHorizontal="10dp"
+                    tools:ignore="KeyboardInaccessibleWidget,TextFields" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cornerRadius="14dp"
-                    android:text="@string/save"
                     android:layout_marginTop="8dp"
-                    android:textColor="@color/white"/>
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    app:cornerRadius="14dp" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
