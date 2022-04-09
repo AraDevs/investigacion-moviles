@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeBinnacleStatus()
+        observeLogsStatus()
         observeCompanyStatus()
         viewModel.getBinnacles()
         viewModel.getCompany()
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      * Checks if the provided [Log] list is null or empty and shows a message if that condition is met,
      * otherwise it will fill the binnacle list with the provided data
      */
-    private fun binnaclesDataBinding(items: List<Log>) {
+    private fun logsDataBinding(items: List<Log>) {
         when {
             items.isNullOrEmpty() -> {
                 binding.noBinnacles.visible()
@@ -92,12 +92,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     /**
      * Observes live data provided from view model to detect binnacle related state changes
      */
-    private fun observeBinnacleStatus() {
+    private fun observeLogsStatus() {
         viewModel.logStatus.observe(this) {
             when (it) {
                 is Status.Success -> {
                     binding.loader.root.gone()
-                    binnaclesDataBinding(it.data)
+                    logsDataBinding(it.data)
                 }
                 is Status.Error -> {
                     Timber.d("Error ${it.exception}")
