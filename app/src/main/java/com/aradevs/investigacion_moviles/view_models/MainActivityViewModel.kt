@@ -46,7 +46,7 @@ class MainActivityViewModel @Inject constructor(
      * If the result is [Status.Success] null safety checks still need to be applied to
      * determine if an empty screen or an item list should be displayed to the user
      */
-    fun getBinnacles() {
+    fun getLogs() {
         viewModelScope.launch(Dispatchers.IO) {
             _logStatus.postValue(Status.Loading())
             when (val status = getLogsUseCase()) {
@@ -62,16 +62,16 @@ class MainActivityViewModel @Inject constructor(
     /**
      * Retrieves [Status.Success] if the request to save the [Log] was successful
      * and [Status.Error] in case something happens while saving the data.
-     * If the result is [Status.Success], [getBinnacles] will be called to obtain the latest
+     * If the result is [Status.Success], [getLogs] will be called to obtain the latest
      * data from the database
      *
      * @param log represents the binnacle to be saved in the database
      */
-    fun saveBinnacle(log: Log) {
+    fun saveLog(log: Log) {
         viewModelScope.launch(Dispatchers.IO) {
             _logStatus.postValue(Status.Loading())
             when (val status = saveLogUseCase(log)) {
-                is Status.Success -> getBinnacles()
+                is Status.Success -> getLogs()
                 is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }
@@ -82,14 +82,14 @@ class MainActivityViewModel @Inject constructor(
     /**
      * Retrieves [Status.Success] if the request to delete the [Log] was successful
      * and [Status.Error] in case something happens while deleting the registry.
-     * If the result is [Status.Success], [getBinnacles] will be called to obtain the latest
+     * If the result is [Status.Success], [getLogs] will be called to obtain the latest
      * data from the database
      */
-    fun deleteBinnacles() {
+    fun deleteLogs() {
         viewModelScope.launch(Dispatchers.IO) {
             _logStatus.postValue(Status.Loading())
             when (val status = deleteLogsUseCase()) {
-                is Status.Success -> getBinnacles()
+                is Status.Success -> getLogs()
                 is Status.Error -> _logStatus.postValue(Status.Error(status.exception))
                 else -> {//do nothing
                 }

@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         observeLogsStatus()
         observeCompanyStatus()
-        viewModel.getBinnacles()
+        viewModel.getLogs()
         viewModel.getCompany()
         setupUiBinding()
 
@@ -41,12 +41,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun setupUiBinding() {
         binding.addBinnacle.setOnClickListener {
             AddLogDialog.newInstance {
-                viewModel.saveBinnacle(it)
+                viewModel.saveLog(it)
             }.show(supportFragmentManager, "add_binnacle_dialog")
         }
 
         binding.deleteAll.setOnClickListener {
-            viewModel.deleteBinnacles()
+            viewModel.deleteLogs()
             viewModel.deleteCompanies()
         }
     }
