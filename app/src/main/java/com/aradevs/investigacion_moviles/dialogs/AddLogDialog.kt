@@ -13,7 +13,6 @@ import com.aradevs.domain.logs.Log
 import com.aradevs.investigacion_moviles.R
 import com.aradevs.investigacion_moviles.databinding.AddLogDialogBinding
 import com.c3rberuss.androidutils.base_views.BaseDialogFragment
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -69,12 +68,12 @@ class AddLogDialog : BaseDialogFragment(), DatePickerDialog.OnDateSetListener,
                     } else {
                         Snackbar.make(binding.root,
                             getString(R.string.validation_error_add_log),
-                            BaseTransientBottomBar.LENGTH_SHORT).show()
+                            LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     Snackbar.make(binding.root,
                         getString(R.string.parse_error_add_log),
-                        BaseTransientBottomBar.LENGTH_SHORT).show()
+                        LENGTH_SHORT).show()
                 }
             }
             cancel.setOnClickListener {
